@@ -1,4 +1,4 @@
-module github.com/batpool/golang-smtp-server
+module github.com/batpool/golang-smtp-server/v1
 
 go 1.18
 

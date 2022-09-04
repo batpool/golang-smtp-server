@@ -15,7 +15,7 @@ import (
 	"log"
 
 
-	"github.com/batpool/golang-smtp-server"
+	"github.com/batpool/golang-smtp-server/v1"
 )
 
 func main() {

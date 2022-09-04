@@ -1,0 +1,40 @@
+package smtpsrvr
+
+import (
+	"crypto/tls"
+	"fmt"
+	"time"
+
+	"github.com/emersion/go-smtp"
+)
+
+type ServerConfig struct {
+	ListenAddr      string
+	BannerDomain    string
+	ReadTimeout     time.Duration
+	WriteTimeout    time.Duration
+	Handler         HandlerFunc
+	Auther          AuthFunc
+	MaxMessageBytes int
+	TLSConfig       *tls.Config
+}
+
+func ListenAndServeTLS(cfg *ServerConfig) error {
+	s := smtp.NewServer(NewBackend(cfg.Auther, cfg.Handler))
+
+	SetDefaultServerConfig(cfg)
+
+	s.Addr = cfg.ListenAddr
+	s.Domain = cfg.BannerDomain
+	s.ReadTimeout = cfg.ReadTimeout
+	s.WriteTimeout = cfg.WriteTimeout
+	s.MaxMessageBytes = cfg.MaxMessageBytes
+	s.AllowInsecureAuth = true
+	s.EnableSMTPUTF8 = false
+	s.EnableREQUIRETLS = true
+	s.TLSConfig = cfg.TLSConfig
+
+	fmt.Printf("⇨ 🦇 smtp server started on over %v, with tls enabled", s.Addr)
+
+	return s.ListenAndServe()
+}

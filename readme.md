@@ -1,4 +1,4 @@
-A SMTP Server Package With TLS [![](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://github.com/batpool/golang-smtp-server)
+A SMTP Server Package With TLS [![](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/batpool/golang-smtp-server)
 =============================
 
 Quick Start
